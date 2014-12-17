@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <Preference
+        android:key="a"
+        android:title="首页"
+        />
+
+    <Preference
+        android:key="b"
+        android:title="京东"
+        />
+
+    <Preference
+        android:key="n"
+        android:title="淘宝"
+        />
+
+
+</PreferenceScreen>

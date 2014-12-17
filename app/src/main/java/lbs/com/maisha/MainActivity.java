@@ -1,39 +1,53 @@
 package lbs.com.maisha;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
 
-public class MainActivity extends ActionBarActivity {
+import lbs.com.maisha.fragment.ContentFragment;
+import lbs.com.maisha.fragment.MenuFragment;
+
+public class MainActivity extends SlidingActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        setTitle(R.string.title);
+        setContentView(R.layout.frame_content);
 
+        setBehindContentView(R.layout.frame_menu);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        MenuFragment menuFragment = new MenuFragment();
+        fragmentTransaction.replace(R.id.menu, menuFragment);
+        fragmentTransaction.replace(R.id.content, new ContentFragment("Welcome"));
+        fragmentTransaction.commit();
+
+        SlidingMenu sm = getSlidingMenu();
+        sm.setShadowWidth(50);
+        sm.setShadowDrawable(R.drawable.shadow);
+        sm.setBehindOffset(60);
+        sm.setFadeDegree(0.35f);
+        sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                toggle();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
