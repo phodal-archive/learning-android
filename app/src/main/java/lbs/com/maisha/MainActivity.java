@@ -23,7 +23,7 @@ public class MainActivity extends SlidingActivity {
         setTitle(R.string.title);
         setContentView(R.layout.frame_content);
 
-         setBehindContentView(R.layout.frame_menu);
+        setBehindContentView(R.layout.frame_menu);
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         MenuFragment menuFragment = new MenuFragment();
         fragmentTransaction.replace(R.id.menu, menuFragment);
