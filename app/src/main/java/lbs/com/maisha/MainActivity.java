@@ -1,6 +1,7 @@
 package lbs.com.maisha;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,9 @@ import lbs.com.maisha.fragment.ContentFragment;
 import lbs.com.maisha.fragment.MenuFragment;
 
 public class MainActivity extends SlidingActivity {
+
+    private static final int SCANNER = 0;
+    private static final int MENU_SCANNER = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,16 +42,24 @@ public class MainActivity extends SlidingActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
+//        getMenuInflater().inflate(R.menu.activity_main, menu);
+        menu.add(SCANNER, MENU_SCANNER, 0 , R.string.scanner );
+        return super.onCreateOptionsMenu(menu);
+//        return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                toggle();
+            case MENU_SCANNER:
+                startScanner();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startScanner() {
+        Intent startScanner = new Intent(this, SimpleScannerActivity.class);
+        startActivity(startScanner);
     }
 }
