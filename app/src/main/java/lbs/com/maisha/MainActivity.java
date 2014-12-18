@@ -23,7 +23,7 @@ public class MainActivity extends SlidingActivity {
         setTitle(R.string.title);
         setContentView(R.layout.frame_content);
 
-        setBehindContentView(R.layout.frame_menu);
+         setBehindContentView(R.layout.frame_menu);
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         MenuFragment menuFragment = new MenuFragment();
         fragmentTransaction.replace(R.id.menu, menuFragment);
@@ -42,15 +42,17 @@ public class MainActivity extends SlidingActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_main, menu);
         menu.add(SCANNER, MENU_SCANNER, 0 , R.string.scanner );
         return super.onCreateOptionsMenu(menu);
-//        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                toggle();
+                return true;
+
             case MENU_SCANNER:
                 startScanner();
                 return true;
